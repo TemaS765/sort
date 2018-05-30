@@ -1,0 +1,10 @@
+.list {
+    display: flex;
+}
+.elem {
+    background: red;
+    border: 1px solid black;
+    text-align: center;
+    margin: 3px 3px 0 0;
+    width: 8px;
+}
