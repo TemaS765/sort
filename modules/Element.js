@@ -1,51 +1,42 @@
 class Element {
-    
-    create() {
+	create() {
+		//добавляем элементы со значениями
 
-            //добавляем элементы со значениями
+		let el = document.createElement('div');
 
-        let el = document.createElement('div');
+		let num = Number(event.key); //преобразуем для сравнения и формирования высоты величины элемента
 
-        let num = Number(event.key); //преобразуем для сравнения и формирования высоты величины элемента
+		if (num >= 1 && num <= 9) {
+			el.setAttribute('class', 'elem');
+			el.innerText = num;
+			el.style.height = 20 * num + 'px';
 
-        if (num >= 1  && num <= 9){
+			return el;
+		} else {
+			return false;
+		}
+	}
 
-            el.setAttribute('class', 'elem');
-            el.innerText = num;
-            el.style.height = 20 * num + "px";
+	repaint() {
+		//для изменения цвета
+		if (timer !== undefined) clearTimeout(timer);
 
-            return el;
-        
-        }
-        else {
-            return false;
-        }
-    }
+		let elems = document.querySelectorAll('.elem');
 
-    repaint () {
-      //для изменения цвета
-    if (timer !== undefined)
-    clearTimeout(timer);
+		for (var i = 0; i < elems.length; i++) {
+			elems[i].style.transition = 'none';
+		}
+		for (var i = 0; i < elems.length; i++) {
+			elems[i].style.background = 'red';
+		}
 
-    let elems = document.querySelectorAll('.elem');
-
-    for(var i = 0; i < elems.length; i++){
-        elems[i].style.transition = 'none';        
-    }
-    for(var i = 0; i < elems.length; i++){
-        elems[i].style.background = 'red';        
-    }
-
-    let timer = setTimeout(function(){
-
-        for(var i = 0; i < elems.length; i++){
-            elems[i].style.transition = '1s';
-            elems[i].style.background = 'aqua';        
-        }
-
-    },10);
-  }
-
-}; 
+		let timer = setTimeout(function() {
+			for (var i = 0; i < elems.length; i++) {
+				elems[i].style.transition = '1s';
+				elems[i].style.background = 'aqua';
+			}
+		}, 10);
+	}
+}
 
 export default new Element();

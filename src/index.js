@@ -1,4 +1,3 @@
-
 //подключаем модули
 
 import Element from '../modules/Element.js';
@@ -12,28 +11,22 @@ var revers = document.querySelector('.revers');
 
 //var flag = false; //флаг защиты от множества выполнений
 
-btn_next.onclick = function () {
+btn_next.onclick = function() {
+	//SortElement(list,revers.checked);
 
-    //SortElement(list,revers.checked);
+	Sorting.transition(list, revers.checked);
+};
 
-    Sorting.transition(list, revers.checked);
+inp.onkeydown = function() {
+	//Исключаем событие нажатия не цифры
+	if (Element.create()) {
+		list.appendChild(Element.create());
+	} else {
+		return false;
+	}
+};
 
-    
-}
-
-inp.onkeydown = function () {
-    
-    //Исключаем событие нажатия не цифры
-    if(Element.create()){
-        list.appendChild(Element.create());
-    }
-    else{
-        return false;
-    }
-}
-
-inp.oninput = function () {
-
-    //анимация для добавленных элементов
-    Element.repaint();
-}
+inp.oninput = function() {
+	//анимация для добавленных элементов
+	Element.repaint();
+};
