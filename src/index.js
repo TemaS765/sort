@@ -14,7 +14,14 @@ var revers = document.querySelector('.revers');
 btn_next.onclick = function() {
 	//SortElement(list,revers.checked);
 
-	Sorting.transition(list, revers.checked);
+	//Sorting.transition(list, revers.checked);
+
+	Sorting.setElements('47864238319');
+	Sorting.sortStep();
+	Sorting.sortStep();
+	Sorting.sortStep();
+	Sorting.sortStep();
+	Sorting.sortStep();
 };
 
 inp.onkeydown = function() {

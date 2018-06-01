@@ -1,9 +1,45 @@
 class Sorting {
+
 	constructor() {
-		window.flag = false; //создание глобального флага для устранения проблемы активного нажатия
+		//window.flag = false; //создание глобального флага для устранения проблемы активного нажатия
+		this.elems = []; //инициализация массива элементов
+		this.stop_index = 0; //инициализация индекса остановки
 	}
 
-	//функция анимирования перестановки
+	setElements (mass){  //метод создания массива элементов из строки
+		let str = mass;
+		this.elems = str.split('');
+	}
+
+	sortStep () {     //метод выполнения шага сортировки
+		let col_elem = this.elems.length;
+		let elems = this.elems;
+		let stop_index = this.stop_index;
+		let i,buf;
+
+		console.log(elems); //для проверки
+
+		for (i = stop_index; i < col_elem - 1; i++){
+			if (elems[i] > elems[i + 1]){
+				buf = elems[i];
+				elems[i] = elems[i + 1];
+				elems[i + 1] = buf;
+				stop_index = i; //записываем индекс
+				break;
+			}
+
+			stop_index = 0;
+		}
+
+		this.stop_index = stop_index;
+
+		console.log(elems); //для проверки
+	}
+
+
+
+
+	/*//функция анимирования перестановки
 	animate(list, i) {
 		//анимация для перемещения
 		list.children[i].style.transition = '0.2s'; //время анимации
@@ -62,7 +98,7 @@ class Sorting {
 				window.flag = false;
 			}
 		}
-	}
+	}*/
 }
 
 export default new Sorting();

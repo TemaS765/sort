@@ -1,9 +1,9 @@
 class Element {
+
 	create() {
 		//добавляем элементы со значениями
 
 		let el = document.createElement('div');
-
 		let num = Number(event.key); //преобразуем для сравнения и формирования высоты величины элемента
 
 		if (num >= 1 && num <= 9) {
@@ -12,9 +12,8 @@ class Element {
 			el.style.height = 20 * num + 'px';
 
 			return el;
-		} else {
+		} else
 			return false;
-		}
 	}
 
 	repaint() {
@@ -37,6 +36,8 @@ class Element {
 			}
 		}, 10);
 	}
+
+	
 }
 
 export default new Element();
