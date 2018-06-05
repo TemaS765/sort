@@ -1,7 +1,8 @@
-//подключаем модули
+"use strict";
 
-import Element from '../modules/Element.js';
-import Sorting from '../modules/Sorting.js';
+//подключаем модули
+import Element from './modules/Element.js';
+import Sorting from './modules/Sorting.js';
 
 //обьявляем глобальные переменные
 var btn_next = document.querySelector('button');
@@ -28,19 +29,35 @@ btn_next.onclick = function() {
 	
 };
 
-inp.onkeydown = function() {
-	//Исключаем событие нажатия не цифры
-	let num = Number(event.key); //преобразуем для сравнения и формирования высоты величины элемента
-
-		if (num >= 1 && num <= 9){
-			
-		}
-		else
-			return false;
-};
-
 inp.oninput = function() {
-	//анимация для добавленных элементов
-	Element.postElem();
-	Element.repaint();
+
+	let key_num = Number(event.data);
+		let str = "";
+		let index = inp.selectionStart - 1;
+
+		Element.correctInput(inp);
+			
+			str = inp.value;
+			let col_sim = str.length;
+			let col_el = list.childNodes.length - 1;
+
+			for(let i = 0; i < col_sim; i++){  //перебираем элементы и сравниваем с отображаемыми
+
+					if (list.children[i] == undefined) //если данный элемент не отображается то создаем и выводим его
+						Element.postElem(i, Element.create(str[i]));
+
+					if(list.children[i].innerText != str[i]){ //проверяем тот ли элемент стоит на данном месте
+						Element.delElem(i);
+						Element.postElem(i, Element.create(str[i]));
+					}
+			}
+
+			if (col_el > col_sim){ //проверяем остались ли лишние элементы
+
+				for(let i = col_sim; i < col_el; i++){ //удаляем их
+						Element.delElem(col_sim);
+				}
+			}
+
+		Element.repaint(); //анимация изменения для жлементов
 };

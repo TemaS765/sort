@@ -7,4 +7,11 @@
     text-align: center;
     margin: 3px 3px 0 0;
     width: 8px;
+    transition: none;
+    transition-delay: none;
+}
+.elem_done{
+	transition: 1s;
+	transition-delay: 0.4s;
+	background: aqua;
 }

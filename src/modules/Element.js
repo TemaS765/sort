@@ -1,5 +1,20 @@
 class Element {
+	//Метод для коррекции ввода
+	correctInput(inp_el){
+		let str = inp_el.value;
+		let res = "";
+		let col_sim = str.length;
 
+		for(let i = 0; i < col_sim; i++){
+			let num = Number(str[i]);
+			if( num >= 1 && num <= 9){
+				res += num;
+			}
+		}
+		
+		inp_el.value = res;		
+	}
+	//метод создания элемента
 	create(num) {
 		//добавляем элементы со значениями
 		let el = document.createElement('div');
@@ -9,36 +24,36 @@ class Element {
 		return el;
 	}
 	//метеод вставки элементов
-	postElem() {
+	postElem(index, elem) {
 		let list = document.querySelector('.list');
-		let mas_elem = document.querySelector('input[type=text]').value;
-		let col_el = mas_elem.length;
-		let elems = [];
-
-		//очищаем массив элементов
+		list.insertBefore(elem,list.children[index]); //вставляем элемент по индексу
+	}
+	//метод удаления всех элементов
+	delAllElem(){
+		let list = document.querySelector('.list');
+	
 		while(list.lastChild){
 			list.removeChild(list.lastChild);
 		}
-		//создаем массив элементов
-		for(let i = 0; i < col_el; i++){
-			elems[i] = this.create(mas_elem[i]);
-			list.appendChild(elems[i]);
-		}
+	}
+	//метод удаления элемента по индексу
+	delElem(index){
+		let list = document.querySelector('.list');
+		list.removeChild(list.children[index]);
 	}
 	//метод перерисовки
 	repaint() {
 		//для изменения цвета
-		if (timer !== undefined) clearTimeout(timer);
+		if (timer !== undefined) 
+			clearTimeout(timer);
 
 		let elems = document.querySelectorAll('.elem');
 
 		for (var i = 0; i < elems.length; i++) {
 			elems[i].style.transition = 'none';
-		}
-		for (var i = 0; i < elems.length; i++) {
 			elems[i].style.background = 'red';
 		}
-
+		
 		let timer = setTimeout(function() {
 			for (var i = 0; i < elems.length; i++) {
 				elems[i].style.transition = '1s';
@@ -49,8 +64,6 @@ class Element {
 	//метод перестановки элементов
 	transpElements(index_elems) {
 		let list = document.querySelector('.list');
-
-	//	console.log("Элементы для перемещения: " + index_elems); //для теста
 
 		if (index_elems == "")
 		{
@@ -100,8 +113,6 @@ class Element {
 		for(let i = 0; i < col_el; i++){
 			mass_el += elems[i].innerText; 
 		}
-
-		//console.log("Текущий массив: " + mass_el);
 
 		return mass_el;
 	}
