@@ -1,3 +1,4 @@
+
 class Sorting {
 
 	constructor() {
@@ -7,8 +8,7 @@ class Sorting {
 	}
 
 	setElements (mass) {  //метод создания массива элементов из строки
-		let str = mass;
-		this.elems = str.split('');
+		this.elems = mass;
 	}
 
 	sortStep (revers) {     //метод выполнения шага сортировки
@@ -19,50 +19,72 @@ class Sorting {
 		let tran_elem = [];
 		let f_done = false;
 
-		for (i = stop_index; i < col_elem - 1; i++){
+		//for (i = stop_index; i < col_elem - 1; i++){
 
 		//	console.log(elems[i] + " > " + elems[i+1]);
 
 			if (revers){       //выбор направления сортировки
 
-				if (elems[i] < elems[i + 1]){
-					buf = elems[i];
-					elems[i] = elems[i + 1];
-					elems[i + 1] = buf;
-					stop_index = i; //записываем индекс
-					tran_elem.push(i); //запоминаем перемещаемые элементы
-					tran_elem.push(i+1);
-					f_done = false;
+                for (i = stop_index; i < col_elem - 1; i++) {
+                    if (elems[i] < elems[i + 1]) {
+                        buf = elems[i];
+                        elems[i] = elems[i + 1];
+                        elems[i + 1] = buf;
+                        stop_index = i; //записываем индекс
+                        tran_elem.push(i); //запоминаем перемещаемые элементы
+                        tran_elem.push(i + 1);
+                        f_done = false;
 
 //				console.log("Сменили местами элементы: " + elems[i] + " и " + elems[i+1]);
 
-				break;
-				}
+                        break;
+                    }
+
+                    if (f_done && i >= col_elem - 2) //выставляем флаг выполнения сортировки если круг прошел без перестановок
+                        break;
+
+                    if (i >= col_elem - 2){
+                        i = -1;
+                        f_done = true;
+                    }
+                }
 			}
 			else{
 
-				if (elems[i] > elems[i + 1]){
-					buf = elems[i];
-					elems[i] = elems[i + 1];
-					elems[i + 1] = buf;
-					stop_index = i; //записываем индекс
-					tran_elem.push(i); //запоминаем перемещаемые элементы
-					tran_elem.push(i+1);
-					f_done = false;
+                for (i = stop_index; i > -1; i--) {
+
+                	//console.log(i);
+
+                    if (elems[i] > elems[i + 1]) {
+                        buf = elems[i];
+                        elems[i] = elems[i + 1];
+                        elems[i + 1] = buf;
+                        stop_index = i; //записываем индекс
+                        tran_elem.push(i); //запоминаем перемещаемые элементы
+                        tran_elem.push(i + 1);
+                        f_done = false;
 
 //				console.log("Сменили местами элементы: " + elems[i] + " и " + elems[i+1]);
 
-					break;
-				}
+                        break;
+                    }
+
+                    if (f_done && i == 0) //выставляем флаг выполнения сортировки если круг прошел без перестановок
+                        break;
+
+                    if (i == 0){
+                        i = col_elem - 1;
+                        f_done = true;
+                }
 
 			}	
-			if (f_done && i >= col_elem - 2) //выставляем флаг выполнения сортировки если круг прошел без перестановок
+			/*if (f_done && i >= col_elem - 2) //выставляем флаг выполнения сортировки если круг прошел без перестановок
 				break;
 
 			if (i >= col_elem - 2){
 				i = -1;
 				f_done = true;
-			}
+			}*/
 
 			//stop_index = 0;
 			
@@ -77,7 +99,7 @@ class Sorting {
 		//console.log(elems);//для теста вывод
 		//console.log(tran_elem);
 
-		return tran_elem;
+		return elems;
 	}
 
 }

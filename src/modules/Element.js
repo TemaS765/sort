@@ -1,4 +1,5 @@
 class Element {
+
 	//Метод для коррекции ввода
 	correctInput(inp_el){
 		let str = inp_el.value;
@@ -15,27 +16,23 @@ class Element {
 		inp_el.value = res;		
 	}
 	//метод создания элемента
-	create(num) {
+	create(num,x,y) {
 		//добавляем элементы со значениями
 		let el = document.createElement('div');
 		el.setAttribute('class', 'elem');
 		el.innerText = num;
 		el.style.height = 20 * num + 'px';
+		el.style.width = 8 + 'px';
+		el.style.left = 15 * x + 'px';
+		el.style.top = 15 * y + 'px';
 		return el;
 	}
 	//метеод вставки элементов
-	postElem(index, elem) {
+	postElem(elem, index) {
 		let list = document.querySelector('.list');
 		list.insertBefore(elem,list.children[index]); //вставляем элемент по индексу
 	}
-	//метод удаления всех элементов
-	delAllElem(){
-		let list = document.querySelector('.list');
-	
-		while(list.lastChild){
-			list.removeChild(list.lastChild);
-		}
-	}
+
 	//метод удаления элемента по индексу
 	delElem(index){
 		let list = document.querySelector('.list');
@@ -43,9 +40,6 @@ class Element {
 	}
 	//метод перерисовки
 	repaint() {
-		//для изменения цвета
-		if (timer !== undefined) 
-			clearTimeout(timer);
 
 		let elems = document.querySelectorAll('.elem');
 
@@ -53,68 +47,121 @@ class Element {
 			elems[i].style.transition = 'none';
 			elems[i].style.background = 'red';
 		}
-		
+
 		let timer = setTimeout(function() {
 			for (var i = 0; i < elems.length; i++) {
-				elems[i].style.transition = '1s';
+				elems[i].style.transition = '0.5s';
 				elems[i].style.background = 'aqua';
 			}
 		}, 10);
 	}
 	//метод перестановки элементов
-	transpElements(index_elems) {
-		let list = document.querySelector('.list');
+	transpElements(mass) {
 
-		if (index_elems == "")
-		{
-			window.flag = false;
-			return;
-		}
+        let list = document.querySelector('.list');
 
-		let i = index_elems[0];
+        let trans_el = [];
 
-		//анимация для перемещения
-		list.children[i].style.transition = '0.2s'; //время анимации
-		list.children[i + 1].style.transition = '0.2s';
-		list.children[i].style.background = 'red';
-		list.children[i + 1].style.background = 'red';
-		list.children[i].style.position = 'relative';
-		list.children[i + 1].style.position = 'relative';
-		list.children[i].style.left = '0px';
-		list.children[i + 1].style.right = '0px';
+        let col_el = list.childNodes.length - 1;
 
-		setTimeout(function() {
-			list.children[i].style.left = 13 + 'px';
-			list.children[i + 1].style.right = 13 + 'px';
-		}, 100);
+        for(let i = 0; i < col_el; i++){
 
-		setTimeout(function() {
-			list.children[i].style.background = 'aqua';
-			list.children[i + 1].style.background = 'aqua';
-			list.insertBefore(list.children[i + 1], list.children[i]);
-			list.children[i].style.transition = 'none'; //отключаем анимацию
-			list.children[i + 1].style.transition = 'none';
+            let num = parseInt(list.children[i].style.left, 10);
+            let pos = (num == 0) ?  0 : num/15;
 
-			list.children[i].style.left = '';
-			list.children[i].style.right = '';
-			list.children[i + 1].style.left = '';
-			list.children[i + 1].style.right = '';
-			window.flag = false;
-		}, 300);
+            if(mass[pos] != list.children[i].innerText) trans_el.push(i);
+
+        }
+
+        if (trans_el.length == 0) return
+
+        let buf_pos = list.children[trans_el[0]].style.left;
+
+        list.children[trans_el[0]].style.background = "red";
+        list.children[trans_el[1]].style.background = "red";
+
+        list.children[trans_el[0]].addEventListener("transitionend",function () {
+            list.children[trans_el[0]].style.transition = "0.5s";
+            list.children[trans_el[0]].style.background = "aqua";
+            list.children[trans_el[1]].style.transition = "0.5s";
+            list.children[trans_el[1]].style.background = "aqua";
+        }, false)
+
+
+        list.children[trans_el[0]].style.left = list.children[trans_el[1]].style.left;
+        list.children[trans_el[1]].style.left = buf_pos;
+
 	}
 	//метод получения текущего расположения элементов на странице
 	currentMassElems() {
 		let list = document.querySelector('.list');
 
-		let elems = list.childNodes;
+		let elems = list.children;
 		let col_el = elems.length;
-		let mass_el = "";
+		let mass_el = [];
 
 		for(let i = 0; i < col_el; i++){
-			mass_el += elems[i].innerText; 
+			let id = parseInt(elems[i].style.left, 10); //получаем место элемента в массиве
+
+			id = (id == 0) ? id = 0 : id = id / 15;
+
+			mass_el[id] = elems[i].innerText;
 		}
 
 		return mass_el;
+	}
+	//Метод создания модели данных
+	createModels(inp,list) {
+
+        let mass_num = inp.value;
+        let mass_el = list.children;
+        let col_num = mass_num.length;
+        let col_el = list.childNodes.length - 1;
+        let i_n;
+        let i_e;
+        let step_x = 15;
+
+        for(i_n = 0; i_n < col_num; i_n++){ //перебираем массив цифр
+
+            let f_el_created = false;
+            let x = (step_x * i_n) + 'px'; //устанавливаем значение по x исходя из положения в массиве
+
+            for(i_e = 0; i_e < col_el; i_e++){  //перебираем массив элементов
+
+                if(mass_el[i_e].style.left == x){  //если на данной позиции в массиве есть элемент
+
+                    let val_el = mass_el[i_e].innerText; //получаем значение элемента
+
+                    if(val_el == mass_num[i_n]){ //если значение равно значению цифры
+                        f_el_created = true;
+                        break;
+                    }
+
+                    this.delElem(i_e); //удаляем элемент если на такой позиции есть элемент с другим значением
+                    break;
+                }
+            }
+
+            if (f_el_created == false){
+                let new_elem = this.create(mass_num[i_n],i_n,0);  //создаем элемент
+                this.postElem(new_elem,i_n);
+            }
+        }
+
+        //после подгонки удаляем лишние элементы
+        if (col_num < col_el){
+
+            for (let i = col_el-1; i >= 0; i--){
+
+                let x_el = parseInt(mass_el[i].style.left,10);
+                let x_del = (col_num - 1) * 15;
+
+                if( x_el > x_del ){
+                    this.delElem(i);
+                }
+            }
+
+        }
 	}
 
 	
