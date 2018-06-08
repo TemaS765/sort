@@ -31,6 +31,8 @@ class Element {
 	postElem(elem, index) {
 		let list = document.querySelector('.list');
 		list.insertBefore(elem,list.children[index]); //вставляем элемент по индексу
+
+
 	}
 
 	//метод удаления элемента по индексу
@@ -145,6 +147,7 @@ class Element {
             if (f_el_created == false){
                 let new_elem = this.create(mass_num[i_n],i_n,0);  //создаем элемент
                 this.postElem(new_elem,i_n);
+                this.repaint();
             }
         }
 

@@ -33,7 +33,7 @@ inp.oninput = function() {
 
     Element.createModels(inp,list);
 
-	Element.repaint(); //анимация изменения для жлементов
+	//Element.repaint(); //анимация изменения для жлементов
 
     //Element.initPositElem(list); //привязка по id
 };
