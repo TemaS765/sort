@@ -5,10 +5,21 @@ import Element from './modules/Element.js';
 import Sorting from './modules/Sorting.js';
 
 //обьявляем глобальные переменные
-var btn_next = document.querySelector('button');
+var btn = document.querySelectorAll('button');
+var btn_next = btn[1];
+var btn_prev = btn[0];
+
 var list = document.querySelector('.list');
 var inp = document.querySelector('input[type=text]');
-var revers = document.querySelector('.revers');
+
+btn_prev.onclick = function() {
+
+    let sort_mass = Sorting.prevStep(); //массив
+
+    if (sort_mass)
+        Element.transpElements(sort_mass);
+
+};
 
 btn_next.onclick = function() {
 
@@ -16,24 +27,22 @@ btn_next.onclick = function() {
 
     Sorting.setElements(mass_el); //добавляем массив в сортировщик
 
-    let sort_mass = Sorting.sortStep(revers.checked); //сортируем массив
+    let sort_mass = Sorting.sortStep(); //сортируем массив
 
-    Element.transpElements(sort_mass);
+    if (sort_mass)
+        Element.transpElements(sort_mass);
 
 };
 
 inp.oninput = function() {
 
-    if(revers.checked)
-        Sorting.stop_index = 0;
-    else
-        Sorting.stop_index = list.childNodes.length - 2;
-
     Element.correctInput(inp);
 
     Element.createModels(inp,list);
 
+    Sorting.claerStory();
 	//Element.repaint(); //анимация изменения для жлементов
 
     //Element.initPositElem(list); //привязка по id
+
 };

@@ -3,17 +3,7 @@ class Element {
 	//Метод для коррекции ввода
 	correctInput(inp_el){
 		let str = inp_el.value;
-		let res = "";
-		let col_sim = str.length;
-
-		for(let i = 0; i < col_sim; i++){
-			let num = Number(str[i]);
-			if( num >= 1 && num <= 9){
-				res += num;
-			}
-		}
-		
-		inp_el.value = res;		
+		inp_el.value = str.replace(/[^1-9]/g,'').split('').map(Number).join('');
 	}
 	//метод создания элемента
 	create(num,x,y) {
@@ -31,8 +21,6 @@ class Element {
 	postElem(elem, index) {
 		let list = document.querySelector('.list');
 		list.insertBefore(elem,list.children[index]); //вставляем элемент по индексу
-
-
 	}
 
 	//метод удаления элемента по индексу
@@ -52,7 +40,7 @@ class Element {
 
 		let timer = setTimeout(function() {
 			for (var i = 0; i < elems.length; i++) {
-				elems[i].style.transition = '0.5s';
+				elems[i].style.transition = '0.3s';
 				elems[i].style.background = 'aqua';
 			}
 		}, 10);
@@ -83,9 +71,9 @@ class Element {
         list.children[trans_el[1]].style.background = "red";
 
         list.children[trans_el[0]].addEventListener("transitionend",function () {
-            list.children[trans_el[0]].style.transition = "0.5s";
+           // list.children[trans_el[0]].style.transition = "0.3s";
             list.children[trans_el[0]].style.background = "aqua";
-            list.children[trans_el[1]].style.transition = "0.5s";
+            //list.children[trans_el[1]].style.transition = "0.3s";
             list.children[trans_el[1]].style.background = "aqua";
         }, false)
 
