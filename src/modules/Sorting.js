@@ -13,12 +13,12 @@ class Sorting {
 	    this.index_story = [];
     }
 
-	setElements (mass) {  //метод создания массива элементов из строки
+	setElements (mass) {  //метод добавления массива элементов
 		this.elems = mass;
 	}
 
 	sortStep () {     //метод выполнения шага сортировки
-	    let elems = this.elems.slice(0);
+	    let elems = this.elems.slice(0); //для копирования массива
 		let col_elem = elems.length;
 		let stop_index = this.stop_index;
 		let i,buf;

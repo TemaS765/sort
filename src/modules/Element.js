@@ -33,7 +33,7 @@ class Element {
 
 		let elems = document.querySelectorAll('.elem');
 
-		for (var i = 0; i < elems.length; i++) {
+		for (let i = 0; i < elems.length; i++) {
 			elems[i].style.transition = 'none';
 			elems[i].style.background = 'red';
 		}
@@ -71,11 +71,9 @@ class Element {
         list.children[trans_el[1]].style.background = "red";
 
         list.children[trans_el[0]].addEventListener("transitionend",function () {
-           // list.children[trans_el[0]].style.transition = "0.3s";
             list.children[trans_el[0]].style.background = "aqua";
-            //list.children[trans_el[1]].style.transition = "0.3s";
             list.children[trans_el[1]].style.background = "aqua";
-        }, false)
+        }, false);
 
 
         list.children[trans_el[0]].style.left = list.children[trans_el[1]].style.left;
@@ -85,15 +83,13 @@ class Element {
 	//метод получения текущего расположения элементов на странице
 	currentMassElems() {
 		let list = document.querySelector('.list');
-
 		let elems = list.children;
 		let col_el = elems.length;
 		let mass_el = [];
 
 		for(let i = 0; i < col_el; i++){
 			let id = parseInt(elems[i].style.left, 10); //получаем место элемента в массиве
-
-			id = (id == 0) ? id = 0 : id = id / 15;
+			id = id / 15;
 
 			mass_el[id] = elems[i].innerText;
 		}
