@@ -17,7 +17,7 @@ module.exports = {
 			}
 		]
 	},
-	devtool: 'eval-sourcemap',
+    devtool: 'eval-sourcemap',
 	plugins: [new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: './src/index.html',
