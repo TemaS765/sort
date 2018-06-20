@@ -7,6 +7,21 @@ class Sorting {
         this.step_story = []; //история шагов
         this.index_story = [];//история индексов
 	}
+	//методы добавления историии шагов сортировки
+	setIndexStory(index){
+		this.index_story.push(index);
+	}
+	getIndexStory(){
+		return this.index_story.pop();
+	}
+
+	setStepStory(step){
+		this.step_story.push(step);
+	}
+	getStepStory(){
+		return this.step_story.pop();
+	}
+
 
 	claerStory(){
 	    this.step_story = [];
@@ -47,8 +62,8 @@ class Sorting {
 		this.stop_index = stop_index;
 
 		if (this.elems.join('') != elems.join('')){
-		    this.index_story.push(stop_index);
-		    this.step_story.push(this.elems.join('')); //кладем шаг в историю
+			this.setIndexStory(stop_index);
+			this.setStepStory(this.elems.join(''));
         }
 		 else{
             return false;
@@ -60,8 +75,8 @@ class Sorting {
     //возвращвем передыдущий шаг
 	prevStep(){
 	    if(this.step_story.length > 0){
-	        this.stop_index = this.index_story.pop();
-            return this.step_story.pop();
+            this.stop_index = this.getIndexStory();
+			return this.getStepStory();
         }
         else
             return false;
