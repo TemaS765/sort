@@ -4,6 +4,8 @@
 import Element from './modules/Element.js';
 import Sorting from './modules/Sorting.js';
 
+var sorting = new Sorting(); //создаем обьект сортировщика
+
 //обьявляем глобальные переменные
 var btn = document.querySelectorAll('button');
 var btn_next = btn[1];
@@ -14,7 +16,7 @@ var inp = document.querySelector('input[type=text]');
 
 btn_prev.onclick = function() {
 
-    let sort_mass = Sorting.prevStep(); //массив
+    let sort_mass = sorting.prevStep(); //массив
 
     if (sort_mass)
         Element.transpElements(sort_mass);
@@ -25,9 +27,9 @@ btn_next.onclick = function() {
 
     let mass_el = Element.currentMassElems();  //получаем текущий массив элементов
 
-    Sorting.setElements(mass_el); //добавляем массив в сортировщик
+    sorting.setElements(mass_el); //добавляем массив в сортировщик
 
-    let sort_mass = Sorting.sortStep(); //сортируем массив
+    let sort_mass = sorting.sortStep(); //сортируем массив
 
     if (sort_mass)
         Element.transpElements(sort_mass);
@@ -40,9 +42,7 @@ inp.oninput = function() {
 
     Element.createModels(inp,list);
 
-    Sorting.claerStory();
-	//Element.repaint(); //анимация изменения для жлементов
+    sorting.claerStory();
 
-    //Element.initPositElem(list); //привязка по id
 
 };

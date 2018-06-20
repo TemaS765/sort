@@ -1,5 +1,5 @@
 
-class Sorting {
+export default class Sorting {
 
 	constructor() {
 		this.elems = []; //инициализация массива элементов
@@ -84,5 +84,3 @@ class Sorting {
     }
 
 }
-
-export default new Sorting();
