@@ -3,7 +3,8 @@ class Element {
 	//Метод для коррекции ввода
 	correctInput(inp_el){
 		let str = inp_el.value;
-		inp_el.value = str.replace(/[^1-9]/g,'').split('').join('');
+		inp_el.value = str.replace(/[^1-9]/g,'');
+
 	}
 	//метод создания элемента
 	create(num,x,y) {
