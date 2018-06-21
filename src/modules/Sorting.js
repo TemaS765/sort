@@ -20,6 +20,9 @@ export default class Sorting {
 	getStepStory(){
 		return this.step_story.pop();
 	}
+	getStopIndex(){
+		return this.stop_index;
+	}
 	claerStory(){
         this.stop_index = 0;
 	    this.step_story = [];

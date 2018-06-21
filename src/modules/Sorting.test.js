@@ -32,12 +32,13 @@ describe('Module Sorting', () => {
         expect(actual).toEqual(expected);
     });
 
-    test('Sorting , work correctly',() => {
+    test('Sorting reset of stop index , work correctly',() => {
         var sorting_4 = new Sorting();
-        var input_data = "949156134849".split('');
+        var input_data = "1234589".split('');
 
-        const expected = input_data.slice(0).sort((a,b) => a - b);
-        const actual = sorting_3.sortMass(input_data);
+        const expected = 0;
+        sorting_4.sortStep(input_data);
+        const actual = sorting_4.getStopIndex();
 
         expect(actual).toEqual(expected);
     });
