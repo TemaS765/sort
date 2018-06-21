@@ -2,7 +2,6 @@
 export default class Sorting {
 
 	constructor() {
-		this.elems = []; //инициализация массива элементов
 		this.stop_index = 0; //инициализация индекса остановки
         this.step_story = []; //история шагов
         this.index_story = [];//история индексов
@@ -21,19 +20,14 @@ export default class Sorting {
 	getStepStory(){
 		return this.step_story.pop();
 	}
-
-
 	claerStory(){
+        this.stop_index = 0;
 	    this.step_story = [];
 	    this.index_story = [];
     }
 
-	setElements (mass) {  //метод добавления массива элементов
-		this.elems = mass;
-	}
-
-	sortStep () {     //метод выполнения шага сортировки
-	    let elems = this.elems.slice(0); //для копирования массива
+	sortStep (mass) {     //метод выполнения шага сортировки
+	    let elems = mass.slice(0); //для копирования массива
 		let col_elem = elems.length;
 		let stop_index = this.stop_index;
 		let i,buf;
@@ -61,14 +55,13 @@ export default class Sorting {
 
 		this.stop_index = stop_index;
 
-		if (this.elems.join('') != elems.join('')){
+		if (elems.join('') != mass.join('')){
 			this.setIndexStory(stop_index);
-			this.setStepStory(this.elems.join(''));
+			this.setStepStory(mass.join(''));
         }
 		 else{
             return false;
 		}
-
 
 		return elems;
 	}
@@ -79,8 +72,20 @@ export default class Sorting {
 			return this.getStepStory();
         }
         else
-            return false;
-
+        	return false;
     }
+	//сортируем массив
+    sortMass(mass){
+
+        let sort_mass = [];
+		let buff_mass = mass;
+        do {
+            sort_mass = buff_mass;
+            buff_mass = this.sortStep(sort_mass);
+        }
+        while (buff_mass)
+
+		return sort_mass;
+	}
 
 }

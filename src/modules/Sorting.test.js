@@ -1,26 +1,45 @@
 import Sorting from './Sorting';
 
-var sorting_1 = new Sorting();
+describe('Module Sorting', () => {
 
-const expected = ["3","2","4","6","7"];
-sorting_1.setElements("34267".split(''));
-const actual = sorting_1.sortStep();
+    test('Sorting step, work correctly',() => {
+        var sorting_1 = new Sorting();
 
-test('Sorting step, work correctly',() => {
-                expect(actual).toEqual(expected);
+        const expected = "32467".split('');
+        const actual = sorting_1.sortStep("34267".split(''));
+
+        expect(actual).toEqual(expected);
     });
 
-//--------------------------------------------------------------
-var sorting_2 = new Sorting();
-var input_data = "546879".split('');
-const expected_data = "456879";
+    test('Sorting geting previous step, work correctly',() => {
+        var sorting_2 = new Sorting();
+        var input_data = "546879".split('');
 
-sorting_2.setElements(input_data);
-sorting_2.setElements(sorting_2.sortStep());
-sorting_2.sortStep();
+        const expected = "456879";
+        sorting_2.sortStep(sorting_2.sortStep(input_data));
+        const actual = sorting_2.getStepStory();
 
-const actual_data = sorting_2.getStepStory();
+        expect(actual).toEqual(expected);
+    });
 
-test('Sorting geting previous step, work correctly',() => {
-    expect(actual_data).toEqual(expected_data);
+    test('Sorting array sorting, work correctly',() => {
+        var sorting_3 = new Sorting();
+        var input_data = "949156134849".split('');
+
+        const expected = input_data.slice(0).sort((a,b) => a - b);
+        const actual = sorting_3.sortMass(input_data);
+
+        expect(actual).toEqual(expected);
+    });
+
+    test('Sorting , work correctly',() => {
+        var sorting_4 = new Sorting();
+        var input_data = "949156134849".split('');
+
+        const expected = input_data.slice(0).sort((a,b) => a - b);
+        const actual = sorting_3.sortMass(input_data);
+
+        expect(actual).toEqual(expected);
+    });
+
 });

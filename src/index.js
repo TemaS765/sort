@@ -27,9 +27,7 @@ btn_next.onclick = function() {
 
     let mass_el = Element.currentMassElems();  //получаем текущий массив элементов
 
-    sorting.setElements(mass_el); //добавляем массив в сортировщик
-
-    let sort_mass = sorting.sortStep(); //сортируем массив
+    let sort_mass = sorting.sortStep(mass_el); //сортируем массив
 
     if (sort_mass)
         Element.transpElements(sort_mass);
