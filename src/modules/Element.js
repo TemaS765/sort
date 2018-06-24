@@ -1,10 +1,19 @@
-class Element {
+export default class Element {
 
+    //метод удаения модели данных
+    removeModel(){
+        document.querySelector('input[type=text]').value = '';
+        this.delAllElem();
+    }
+    //Метод удаления всех элементов
+    delAllElem(){
+        let list = document.querySelector('.list');
+        while (list.firstChild) list.removeChild(list.firstChild);
+    }
 	//Метод для коррекции ввода
 	correctInput(inp_el){
 		let str = inp_el.value;
 		inp_el.value = str.replace(/[^1-9]/g,'');
-
 	}
 	//метод создания элемента
 	create(num,x,y) {
@@ -91,7 +100,6 @@ class Element {
 		for(let i = 0; i < col_el; i++){
 			let id = parseInt(elems[i].style.left, 10); //получаем место элемента в массиве
 			id = id / 15;
-
 			mass_el[id] = elems[i].innerText;
 		}
 
@@ -155,4 +163,3 @@ class Element {
 	
 }
 
-export default new Element();

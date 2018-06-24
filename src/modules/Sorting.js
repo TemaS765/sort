@@ -13,7 +13,6 @@ export default class Sorting {
 	getIndexStory(){
 		return this.index_story.pop();
 	}
-
 	setStepStory(step){
 		this.step_story.push(step);
 	}
@@ -77,7 +76,7 @@ export default class Sorting {
         else
         	return false;
     }
-	//сортируем массив
+	//метод полной сортировки массива
     sortMass(mass){
 
         let sort_mass = [];
