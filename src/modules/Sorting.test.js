@@ -32,13 +32,24 @@ describe('Module Sorting', () => {
         expect(actual).toEqual(expected);
     });
 
-    test('Sorting reset of stop index , work correctly',() => {
+    test('Sorting reset stop index of the boundary case, work correctly',() => {
         var sorting_4 = new Sorting();
         var input_data = "1234589".split('');
 
         const expected = 0;
         sorting_4.sortStep(input_data);
         const actual = sorting_4.getStopIndex();
+
+        expect(actual).toEqual(expected);
+    });
+
+    test('Sorting reset stop index of the boundary case , work correctly',() => {
+        var sorting_5 = new Sorting();
+        var input_data = "595694664".split('');
+
+        const expected = 0;
+        sorting_5.prevStep(input_data);
+        const actual = sorting_5.getStopIndex();
 
         expect(actual).toEqual(expected);
     });
