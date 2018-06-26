@@ -22,4 +22,8 @@ module.exports = {
 			filename: 'index.html',
 			template: './src/index.html',
 		})],
+    devServer: {
+		contentBase: './src',
+		port: 9000
+	}
 }
