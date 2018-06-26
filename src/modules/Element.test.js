@@ -22,12 +22,12 @@ describe('Module Element',() => {
 
         element.createModels(inp,list);
 
-        const actual = element.currentMassElems();
+        const actual = element.currentMassElems;
 
         expect(actual).toEqual(expected);
 
         //отменяем изменения
-        element.removeModel();
+        element.removeModel;
     });
 
     test('Element get current array elements, work correctly',() => {
@@ -39,12 +39,12 @@ describe('Module Element',() => {
 
         element.createModels(inp,list);
 
-        const actual = element.currentMassElems().join('');
+        const actual = element.currentMassElems.join('');
         const expected = inp.value;
         expect(actual).toEqual(expected);
 
         //удаляем модель
-        element.removeModel();
+        element.removeModel;
     });
 
     test('Element transposition elements, work correctly',() => {
@@ -56,16 +56,16 @@ describe('Module Element',() => {
 
         element.createModels(inp,list);
 
-        const expected = sorting.sortStep(element.currentMassElems());
+        const expected = sorting.sortStep(element.currentMassElems);
 
         element.transpElements(expected);
 
-        const actual = element.currentMassElems();
+        const actual = element.currentMassElems;
 
         expect(actual).toEqual(expected);
 
         //удаляем модель
-        element.removeModel();
+        element.removeModel;
     });
 
     test('Element transposition elements with an unchanged array, work correctly',() => {
@@ -81,12 +81,12 @@ describe('Module Element',() => {
 
         element.transpElements(expected);
 
-        const actual = element.currentMassElems();
+        const actual = element.currentMassElems;
 
         expect(actual).toEqual(expected);
 
         //удаляем модель
-        element.removeModel();
+        element.removeModel;
     });
 
 });

@@ -1,12 +1,12 @@
 export default class Element {
 
     //метод удаения модели данных
-    removeModel(){
+    get removeModel(){
         document.querySelector('input[type=text]').value = '';
-        this.delAllElem();
+        this.delAllElem;
     }
     //Метод удаления всех элементов
-    delAllElem(){
+    get delAllElem(){
         let list = document.querySelector('.list');
         while (list.firstChild) list.removeChild(list.firstChild);
     }
@@ -39,7 +39,7 @@ export default class Element {
 		list.removeChild(list.children[index]);
 	}
 	//метод перерисовки
-	repaint() {
+	get repaint() {
 
 		let elems = document.querySelectorAll('.elem');
 
@@ -91,7 +91,7 @@ export default class Element {
 
 	}
 	//метод получения текущего расположения элементов на странице
-	currentMassElems() {
+	get currentMassElems() {
 		let list = document.querySelector('.list');
 		let elems = list.children;
 		let col_el = elems.length;
@@ -140,7 +140,7 @@ export default class Element {
             if (f_el_created == false){
                 let new_elem = this.create(mass_num[i_n],i_n,0);  //создаем элемент
                 this.postElem(new_elem,i_n);
-                this.repaint();
+                this.repaint;
             }
         }
 

@@ -4,9 +4,10 @@ describe('Module Sorting', () => {
 
     test('Sorting step, work correctly',() => {
         var sorting_1 = new Sorting();
+        var input_data = "34267".split('');
 
         const expected = "32467".split('');
-        const actual = sorting_1.sortStep("34267".split(''));
+        const actual = sorting_1.sortStep(input_data);
 
         expect(actual).toEqual(expected);
     });
@@ -39,17 +40,6 @@ describe('Module Sorting', () => {
         const expected = 0;
         sorting_4.sortStep(input_data);
         const actual = sorting_4.getStopIndex();
-
-        expect(actual).toEqual(expected);
-    });
-
-    test('Sorting reset stop index of the boundary case , work correctly',() => {
-        var sorting_5 = new Sorting();
-        var input_data = "595694664".split('');
-
-        const expected = 0;
-        sorting_5.prevStep(input_data);
-        const actual = sorting_5.getStopIndex();
 
         expect(actual).toEqual(expected);
     });

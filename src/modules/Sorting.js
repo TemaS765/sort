@@ -22,7 +22,7 @@ export default class Sorting {
 	getStopIndex(){
 		return this.stop_index;
 	}
-	claerStory(){
+	get clearStory(){
         this.stop_index = 0;
 	    this.step_story = [];
 	    this.index_story = [];
@@ -68,13 +68,15 @@ export default class Sorting {
 		return elems;
 	}
     //возвращвем передыдущий шаг
-	prevStep(){
+	get prevStep(){
 	    if(this.step_story.length > 0){
             this.stop_index = this.getIndexStory();
 			return this.getStepStory();
         }
-        else
-        	return false;
+        else {
+	    	//this.stop_index = 0;
+            return false;
+        }
     }
 	//метод полной сортировки массива
     sortMass(mass){
