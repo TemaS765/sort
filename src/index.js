@@ -17,7 +17,7 @@ var inp = document.querySelector('input[type=text]');
 
 btn_prev.onclick = function() {
 
-    let sort_mass = sorting.prevStep; //массив
+    let sort_mass = sorting.prevStep(); //массив
 
     if (sort_mass)
         element.transpElements(sort_mass);
@@ -26,7 +26,7 @@ btn_prev.onclick = function() {
 
 btn_next.onclick = function() {
 
-    let mass_el = element.currentMassElems;  //получаем текущий массив элементов
+    let mass_el = element.currentMassElems();  //получаем текущий массив элементов
 
     let sort_mass = sorting.sortStep(mass_el); //сортируем массив
 
@@ -41,7 +41,7 @@ inp.oninput = function() {
 
     element.createModels(inp,list);
 
-    sorting.clearStory;
+    sorting.clearStory();
 
 
 };

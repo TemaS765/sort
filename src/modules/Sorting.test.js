@@ -18,7 +18,7 @@ describe('Module Sorting', () => {
 
         const expected = "456879";
         sorting_2.sortStep(sorting_2.sortStep(input_data));
-        const actual = sorting_2.getPrevStep;
+        const actual = sorting_2.getPrevStep();
 
         expect(actual).toEqual(expected);
     });
@@ -39,7 +39,7 @@ describe('Module Sorting', () => {
 
         const expected = 0;
         sorting_4.sortStep(input_data);
-        const actual = sorting_4.getStopIndex;
+        const actual = sorting_4.getStopIndex();
 
         expect(actual).toEqual(expected);
     });

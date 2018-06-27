@@ -10,25 +10,25 @@ export default class Sorting {
 	setIndexStory(index){
 		this.index_story.push(index);
 	}
-  	get getPrevIndex(){
+  	getPrevIndex(){
         return this.index_story[this.index_story.length - 1];
     }
-  	get	popIndexStory(){
+  	popIndexStory(){
 		return this.index_story.pop();
 	}
 	setStepStory(step){
 		this.step_story.push(step);
 	}
-    get getPrevStep(){
+    getPrevStep(){
         return this.step_story[this.step_story.length - 1];
     }
-	get popStepStory(){
+	popStepStory(){
 		return this.step_story.pop();
 	}
-	get getStopIndex(){
+	getStopIndex(){
 		return this.stop_index;
 	}
-	get clearStory(){
+	clearStory(){
         this.stop_index = 0;
 	    this.step_story = [];
 	    this.index_story = [];
@@ -74,10 +74,10 @@ export default class Sorting {
 		return elems;
 	}
     //возвращвем передыдущий шаг
-	get prevStep(){
+	prevStep(){
 	    if(this.step_story.length > 0){
-            this.stop_index = this.popIndexStory;
-			return this.popStepStory;
+            this.stop_index = this.popIndexStory();
+			return this.popStepStory();
         }
         else {
 	    	//this.stop_index = 0;
