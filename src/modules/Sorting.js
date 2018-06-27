@@ -10,16 +10,22 @@ export default class Sorting {
 	setIndexStory(index){
 		this.index_story.push(index);
 	}
-	getIndexStory(){
+  	get getPrevIndex(){
+        return this.index_story[this.index_story.length - 1];
+    }
+  	get	popIndexStory(){
 		return this.index_story.pop();
 	}
 	setStepStory(step){
 		this.step_story.push(step);
 	}
-	getStepStory(){
+    get getPrevStep(){
+        return this.step_story[this.step_story.length - 1];
+    }
+	get popStepStory(){
 		return this.step_story.pop();
 	}
-	getStopIndex(){
+	get getStopIndex(){
 		return this.stop_index;
 	}
 	get clearStory(){
@@ -70,8 +76,8 @@ export default class Sorting {
     //возвращвем передыдущий шаг
 	get prevStep(){
 	    if(this.step_story.length > 0){
-            this.stop_index = this.getIndexStory();
-			return this.getStepStory();
+            this.stop_index = this.popIndexStory;
+			return this.popStepStory;
         }
         else {
 	    	//this.stop_index = 0;
